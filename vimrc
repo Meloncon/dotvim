@@ -4,6 +4,10 @@
 " http://net.tutsplus.com
 "
 
+"Activating Pathogen
+call pathogen#incubate()
+call pathogen#helptags()
+
 "Forget compatibility with Vi. Who cares.
 set nocompatible
 
