@@ -1,5 +1,6 @@
 " .vimrc File
-" Maintained by: Jeffrey Way
+" Maintained by: Matt Meloncon
+" Based on: Jeffrey Way
 " jeffrey@jeffrey-way.com
 " http://net.tutsplus.com
 "
@@ -7,15 +8,17 @@
 "Activating Pathogen
 call pathogen#incubate()
 call pathogen#helptags()
+execute pathogen#infect()
 
 "Forget compatibility with Vi. Who cares.
 set nocompatible
+
+syntax on
 
 "Enable filetypes
 filetype on
 filetype plugin on
 filetype indent on
-syntax on
 
 "Write the old file out when switching between files.
 set autowrite

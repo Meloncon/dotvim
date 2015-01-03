@@ -10,3 +10,10 @@
 4. Run "git submodule init"
 
 5. Run "git submodule update"
+
+
+# Hints and Tips
+
+If using Cygwin as your terminal, you'll need to switch the type of your
+terminal to "xterm-256color" to get the full colorscheme.
+Location: "Options" -> "Terminal" -> "Type" -> change to "xterm-256color"
