@@ -47,7 +47,7 @@ set guifont=Menlo:h14
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-"set expandtab
+set expandtab
 
 "Show command in bottom right portion of the screen
 set showcmd
