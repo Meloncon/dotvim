@@ -234,3 +234,7 @@ map! ;h <a href=""></a><ESC>5hi
 
 " Execute Pathogen
 execute pathogen#infect()
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Copy & Paste
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set clipboard=unnamedplus
