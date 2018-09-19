@@ -55,8 +55,8 @@ autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buff
 set hlsearch                   " highlight matches
 set incsearch                  " incremental searching
 set ignorecase smartcase                 " searches are case insensitive...
-set backupdir=~/vim_tmp
-set directory=~/vim_tmp
+set backupdir=~/.vim/tmp
+set directory=~/.vim/tmp
 set cursorline
 set cmdheight=1
 " Fix slow O inserts
@@ -364,6 +364,11 @@ hi StatusLine ctermbg=white ctermfg=black
 "are making it so you have to do it too fast to be able to use these.
 noremap gl* :VimwikiChangeSymbolTo *<CR>
 noremap gL* :VimwikiChangeSymbolInListTo *<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"NERDTree Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeShowHidden=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "this has to be at the bottom.
