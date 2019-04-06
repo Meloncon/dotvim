@@ -1,0 +1,22 @@
+snippet desc "describe block"
+describe "$1" do
+	$2
+end
+endsnippet
+
+snippet it "rspec it block"
+it '$1' do
+	$0
+end
+
+endsnippet
+
+snippet its "rspec it block on a single line"
+it { expect($1).to $2 }
+endsnippet
+
+snippet itb "rspec it block on a single line"
+it { 
+	$0
+}
+endsnippet

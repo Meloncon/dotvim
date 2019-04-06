@@ -23,7 +23,8 @@ call minpac#add('https://github.com/xolox/vim-session.git')
 call minpac#add('https://github.com/vimwiki/vimwiki')
 call minpac#add('https://github.com/kchmck/vim-coffee-script.git')
 call minpac#add('https://github.com/scrooloose/nerdcommenter.git')
-
+call minpac#add('https://github.com/zah/nim.vim.git')
+call minpac#add('https://github.com/rhysd/vim-crystal.git')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -35,6 +36,7 @@ set nocompatible
 filetype plugin indent on
 syntax on
 let mapleader = ","
+set rtp=/home/matt/.local/lib/python2.7/site-packages/powerline/bindings/vim
 set laststatus=2               "  Always show status line.
 set linespace=0                "  No extra spaces between rows
 set nu                         "  Line numbers on
@@ -88,6 +90,7 @@ set encoding=utf-8
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "colorscheme molokai
 colorscheme railscasts
+"colorscheme jellybeans
 set guifont=Andale\ Mono\ 9
 
 "This line is here to override the rails cast theme color for code folding...
@@ -369,6 +372,22 @@ noremap gL* :VimwikiChangeSymbolInListTo *<CR>
 "NERDTree Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDTreeShowHidden=1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Nim Plugin Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+
+" Jump to tag
+nn <M-g> :call JumpToDef()<cr>
+ino <M-g> <esc>:call JumpToDef()<cr>i
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "this has to be at the bottom.
