@@ -36,7 +36,6 @@ set nocompatible
 filetype plugin indent on
 syntax on
 let mapleader = ","
-set rtp=/home/matt/.local/lib/python2.7/site-packages/powerline/bindings/vim
 set laststatus=2               "  Always show status line.
 set linespace=0                "  No extra spaces between rows
 set nu                         "  Line numbers on
