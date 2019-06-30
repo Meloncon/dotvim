@@ -25,7 +25,10 @@ call minpac#add('https://github.com/kchmck/vim-coffee-script.git')
 call minpac#add('https://github.com/scrooloose/nerdcommenter.git')
 call minpac#add('https://github.com/zah/nim.vim.git')
 call minpac#add('https://github.com/rhysd/vim-crystal.git')
-
+call minpac#add('https://github.com/vim-airline/vim-airline.git')
+call minpac#add('https://github.com/vim-airline/vim-airline-themes.git')
+call minpac#add('https://github.com/tyrannicaltoucan/vim-quantum.git')
+call minpac#add('https://github.com/lcolaholicl/vim-v.git')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
@@ -52,7 +55,7 @@ set nowrap                     "  wrap long lines
 set t_Co=256
 set pastetoggle=<F12>          "  pastetoggle (sane indentation on pastes)
 set novb                       "  Set the no visual bell to prevent flashing when saving"
-autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType c,cpp,java,php,js,python,twig,xml,yml,coffee autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 set hlsearch                   " highlight matches
 set incsearch                  " incremental searching
 set ignorecase smartcase                 " searches are case insensitive...
@@ -63,6 +66,8 @@ set cmdheight=1
 " Fix slow O inserts
 set timeout timeoutlen=1000 ttimeoutlen=0
 set nojoinspaces
+
+
 
 " ================ Indentation ======================
 set ts=2  " Tabs are 2 spaces
@@ -87,10 +92,22 @@ set encoding=utf-8
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"colorscheme molokai
-colorscheme railscasts
-"colorscheme jellybeans
-set guifont=Andale\ Mono\ 9
+"Matt's Custom Settings
+set background=dark
+
+" Enable true color 启用终端24位色
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+set termguicolors
+colorscheme quantum
+set guifont=Fira\ Mono\ Medium\ 11
+
+"colorscheme railscasts
+"set guifont=Andale\ Mono\ 9
 
 "This line is here to override the rails cast theme color for code folding...
 "sucks as it's some horrible color
@@ -335,6 +352,24 @@ iabbr shoudl should
 iabbr nto not
 iabbr updatign updating
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Airline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set laststatus=2
+let g:airline#extensions#tabline#enabled=1
+let g:airline_theme='bubblegum'
+"let g:airline_powerline_fonts=1
+let g:airline#extensions#branch#enabled=1
+let g:airline_powerline_fonts = 1
+" Syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list=1
+"let g:syntastic_auto_loc_list=1
+"let g:syntastic_check_on_open=1
+"let g:syntastic_check_on_wq=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Ultisnips
