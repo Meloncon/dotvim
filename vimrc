@@ -29,6 +29,14 @@ call minpac#add('https://github.com/vim-airline/vim-airline.git')
 call minpac#add('https://github.com/vim-airline/vim-airline-themes.git')
 call minpac#add('https://github.com/tyrannicaltoucan/vim-quantum.git')
 call minpac#add('https://github.com/lcolaholicl/vim-v.git')
+call minpac#add('https://github.com/arrufat/vala.vim.git')
+call minpac#add('https://github.com/cespare/vim-toml.git')
+"call minpac#add('https://github.com/vim-syntastic/syntastic.git')
+call minpac#add('https://github.com/nvie/vim-flake8.git')
+"call minpac#add('https://github.com/pangloss/vim-javascript.git')
+"call minpac#add('https://github.com/MaxMEllon/vim-jsx-pretty.git')
+"call minpac#add('https://github.com/dense-analysis/ale.git')
+call minpac#add('https://github.com/neoclide/coc.nvim.git')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
@@ -93,7 +101,7 @@ set encoding=utf-8
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Matt's Custom Settings
-set background=dark
+"set background=dark
 
 " Enable true color 启用终端24位色
 if exists('+termguicolors')
@@ -114,6 +122,9 @@ set guifont=Fira\ Mono\ Medium\ 11
 highlight Folded guifg=DarkGreen guibg=Black 
 highlight Folded ctermbg=black
 highlight Folded ctermfg=darkgrey
+hi NonText ctermbg=none
+hi Normal guibg=NONE ctermbg=NONE
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Copy & Paste
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -387,6 +398,11 @@ let g:UltiSnipsEditSplit="vertical"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rust_recommended_style = 0
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Python settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let python_highlight_all=1
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "removed the status line so changing the colors to make eyes hurt less
@@ -422,6 +438,22 @@ endf
 " Jump to tag
 nn <M-g> :call JumpToDef()<cr>
 ino <M-g> <esc>:call JumpToDef()<cr>i
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"CTRLP configuration
+" sudo apt-get install silversearcher-ag
+" ref : https://github.com/ggreer/the_silver_searcher
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <C-p> :CtrlP<cr>
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+if executable('ag')
+  let g:ackprg = 'ag --nogroup --nocolor --column'
+  "let g:ackprg = 'ag --vimgrep'
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "this has to be at the bottom.
