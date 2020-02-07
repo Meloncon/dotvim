@@ -1,240 +1,430 @@
-" .vimrc File
-" Maintained by: Matt Meloncon
-" Based on: Jeffrey Way
-" jeffrey@jeffrey-way.com
-" http://net.tutsplus.com
-"
+filetype off
 
-"Activating Pathogen
-call pathogen#incubate()
-call pathogen#helptags()
-execute pathogen#infect()
+"Packages
+packadd minpac
+call minpac#init()
+call minpac#add('https://github.com/tpope/vim-rails.git')
+call minpac#add('https://github.com/tpope/vim-fugitive.git')
+call minpac#add('https://github.com/tpope/vim-surround.git')
+call minpac#add('https://github.com/tpope/vim-unimpaired.git')
+call minpac#add('https://github.com/scrooloose/nerdtree.git')
+call minpac#add('https://github.com/Xuyuanp/nerdtree-git-plugin.git')
+call minpac#add('https://github.com/ctrlpvim/ctrlp.vim.git')
+call minpac#add('https://github.com/mileszs/ack.vim.git')
+call minpac#add('https://github.com/maralla/completor.vim.git')
+call minpac#add('https://github.com/SirVer/ultisnips.git')
+call minpac#add('https://github.com/honza/vim-snippets.git')
+call minpac#add('https://github.com/godlygeek/tabular.git')
+call minpac#add('https://github.com/Raimondi/delimitMate.git')
+call minpac#add('https://github.com/mattn/emmet-vim.git')
+call minpac#add('https://github.com/rust-lang/rust.vim.git')
+call minpac#add('https://github.com/xolox/vim-misc.git')
+call minpac#add('https://github.com/xolox/vim-session.git')
+call minpac#add('https://github.com/vimwiki/vimwiki')
+call minpac#add('https://github.com/kchmck/vim-coffee-script.git')
+call minpac#add('https://github.com/scrooloose/nerdcommenter.git')
+call minpac#add('https://github.com/zah/nim.vim.git')
+call minpac#add('https://github.com/rhysd/vim-crystal.git')
+call minpac#add('https://github.com/vim-airline/vim-airline.git')
+call minpac#add('https://github.com/vim-airline/vim-airline-themes.git')
+call minpac#add('https://github.com/tyrannicaltoucan/vim-quantum.git')
+call minpac#add('https://github.com/lcolaholicl/vim-v.git')
 
-"Forget compatibility with Vi. Who cares.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+noremap Q !!sh<CR>
+
 set nocompatible
-
+filetype plugin indent on
 syntax on
-
-"Enable filetypes
-filetype on
-filetype plugin on
-filetype indent on
-
-"Write the old file out when switching between files.
-set autowrite
-
-"Display current cursor position in lower right corner.
-set ruler
-
-"Want a different map leader than \
-"set mapleader = ",";
-
-"Ever notice a slight lag after typing the leader key + command? This lowers
-"the timeout.
-set timeoutlen=500
-
-"Switch between buffers without saving
+let mapleader = ","
+set laststatus=2               "  Always show status line.
+set linespace=0                "  No extra spaces between rows
+set nu                         "  Line numbers on
+set showmatch                  "  show matching brackets/parenthesis
+set number                     "  Line numbers are good
+set relativenumber             "  Setup relative line numbers
+set backspace=indent,eol,start "  Allow backspace in insert mode
+set history=10000              "  Store lots of :cmdline history
 set hidden
+set showcmd                    "  Show incomplete cmds down the bottom
+set showmode                   "  Show current mode down the bottom
+set autoread                   "  Reload files changed outside vim
+set nowrap                     "  wrap long lines
+set t_Co=256
+set pastetoggle=<F12>          "  pastetoggle (sane indentation on pastes)
+set novb                       "  Set the no visual bell to prevent flashing when saving"
+autocmd FileType c,cpp,java,php,js,python,twig,xml,yml,coffee autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+set hlsearch                   " highlight matches
+set incsearch                  " incremental searching
+set ignorecase smartcase                 " searches are case insensitive...
+set backupdir=~/.vim/tmp
+set directory=~/.vim/tmp
+set cursorline
+set cmdheight=1
+" Fix slow O inserts
+set timeout timeoutlen=1000 ttimeoutlen=0
+set nojoinspaces
 
-"Set the color scheme. Change this to your preference. 
-"Here's 100 to choose from: http://www.vim.org/scripts/script.php?script_id=625
-colorscheme jellybeans
 
-"Set font type and size. Depends on the resolution. Larger screens, prefer h20
-set guifont=Menlo:h14
 
-"Tab stuff
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+" ================ Indentation ======================
+set ts=2  " Tabs are 2 spaces
+set bs=2  " Backspace over everything in insert mode
+set shiftwidth=2  " Tabs under smart indent
+set nocp incsearch
+set cinoptions=:0,p0,t0
+set cinwords=if,else,while,do,for,switch,case
+set formatoptions=tcqr
+set cindent
+set autoindent
+set smarttab
 set expandtab
 
-"Show command in bottom right portion of the screen
-set showcmd
+" ================ Folds ============================
+set foldmethod=indent   "fold based on syntax
+set foldnestmax=3       "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf-8
 
-"Show lines numbers
-set number
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Matt's Custom Settings
+set background=dark
 
-"Prefer relative line numbering?
-"set relativenumber"
-
-"Indent stuff
-set smartindent
-set autoindent
-
-"Always show the status line
-set laststatus=2
-
-"Prefer a slightly higher line height
-set linespace=3
-
-"Better line wrapping 
-set wrap
-set textwidth=79
-set formatoptions=qrn1
-
-"Set incremental searching"
-set incsearch
-
-"Highlight searching
-set hlsearch
-
-" case insensitive search
-set ignorecase
-set smartcase
-
-"Hide MacVim toolbar by default
-set go-=T
-
-"Hard-wrap paragraphs of text
-nnoremap <leader>q gqip
-
-"Enable code folding
-set foldenable
-
-"Hide mouse when typing
-set mousehide
-
-"Shortcut to fold tags with leader (usually \) + ft
-nnoremap <leader>ft Vatzf
-
-" Create dictionary for custom expansions
-set dictionary+=/Users/jeff_way/.vim/dict.txt
-
-"Opens a vertical split and switches over (\v)
-nnoremap <leader>v <C-w>v<C-w>l
-
-"Split windows below the current window.
-set splitbelow              
-
-" session settings
-set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
-
-"Set up an HTML5 template for all new .html files
-"autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
-
-"Load the current buffer in Firefox - Mac specific.
-abbrev ff :! open -a firefox.app %:p<cr>
-
-"Map a change directory to the desktop - Mac specific
-nmap <leader>d :cd ~/Desktop<cr>:e.<cr>
-
-"Shortcut for editing  vimrc file in a new tab
-nmap <leader>ev :tabedit $MYVIMRC<cr>
-
-"Change zen coding plugin expansion key to shift + e
-let g:user_zen_expandabbr_key = '<C-e>'
-
-"Faster shortcut for commenting. Requires T-Comment plugin
-map <leader>c <c-_><c-_>
-
-"Saves time; maps the spacebar to colon
-nmap <space> :
-
-"Automatically change current directory to that of the file in the buffer
-autocmd BufEnter * cd %:p:h
-
-"Map code completion to , + tab
-imap <leader><tab> <C-x><C-o>
-
-" More useful command-line completion
-set wildmenu
-
-"Auto-completion menu
-set wildmode=list:longest
-
-"http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-set completeopt=longest,menuone
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
-"Map escape key to jj -- much faster
-imap jj <esc>
-
-"Delete all buffers (via Derek Wyatt)
-nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
-
-"Bubble single lines (kicks butt)
-"http://vimcasts.org/episodes/bubbling-text/
-nmap <C-Up> ddkP
-nmap <C-Down> ddp
-
-"Bubble multiple lines
-vmap <C-Up> xkP`[V`]
-vmap <C-Down> xp`[V`]
-
-" Source the vimrc file after saving it. This way, you don't have to reload Vim to see the changes.
-if has("autocmd")
- augroup myvimrchooks
-  au!
-  autocmd bufwritepost .vimrc source ~/.vimrc
- augroup END
+" Enable true color 启用终端24位色
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
 endif
 
-" easier window navigation
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
+set termguicolors
+colorscheme quantum
+set guifont=Fira\ Mono\ Medium\ 11
 
-"------------------------"
-"NERDTREE PLUGIN SETTINGS
-"------------------------"
-"Shortcut for NERDTreeToggle
-nmap <leader>nt :NERDTreeToggle <CR>
+"colorscheme railscasts
+"set guifont=Andale\ Mono\ 9
 
-"Show hidden files in NerdTree
-let NERDTreeShowHidden=1
-
-"autopen NERDTree and focus cursor in new document
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
-
-"Helpeful abbreviations
-iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-
-"Spelling corrects. Just for example. Add yours below.
-iab teh the
-iab Teh The
-
-" Get to home dir easier
-" <leader>hm is easier to type than :cd ~
-nmap <leader>hm :cd ~/ <CR>
-
-" Alphabetically sort CSS properties in file with :SortCSS
-:command! SortCSS :g#\({\n\)\@<=#.,/}/sort
-
-" Shortcut to opening a virtual split to right of current pane
-" Makes more sense than opening to the left
-nmap <leader>bv :bel vsp
-
-" Saves file when Vim window loses focus
-au FocusLost * :wa
-
-" Backups
-set backupdir=~/.vim/tmp/backup// " backups
-set directory=~/.vim/tmp/swap// " swap files
-set backup " enable backup
-
-" No more stretching for navigating files
-"noremap h ;
-"noremap j h
-"noremap k gj
-"noremap l gk
-"noremap ; l
-
-set showmatch " show matching brackets
-
-" print empty <a> tag
-map! ;h <a href=""></a><ESC>5hi
-
-" Execute Pathogen
-execute pathogen#infect()
+"This line is here to override the rails cast theme color for code folding...
+"sucks as it's some horrible color
+highlight Folded guifg=DarkGreen guibg=Black 
+highlight Folded ctermbg=black
+highlight Folded ctermfg=darkgrey
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Copy & Paste
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set clipboard=unnamedplus
+let NERDTreeMouseMode = 3
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Key Mappins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <Leader>sf <esc>:w<cr>
+map <Leader>config <esc>:e ~/.ssh/config<cr>
+map <Leader>qa <esc>:qa<cr>
+map <C-s> <esc>:w<CR>
+imap <C-s> <esc>:w<CR>
+map <C-t> <esc>:tabnew<CR>
+nmap <Leader>bi :source ~/.vimrc<cr>:call minpac#update()<cr>
+nmap <Leader>bs :source ~/.vimrc<cr>:BundleSearch<cr>
+nmap <Leader>bc :source ~/.vimrc<cr>:call minpac#clean()<cr>
+map <Leader>vie :tabe ~/.vimrc<CR>
+map <Leader>vi :e ~/.vimrc<CR>
+map <Leader>n :NERDTreeToggle<cr>
+nmap <Leader>ff :NERDTreeFind<CR>
+map <Leader>vs :botright vne <CR>
+map <Leader>wb :bel new <CR>
+map <Leader>wn :new<CR>
+nmap <S-h> 0
+nmap <S-l> $
+vmap <S-h> 0
+vmap <S-l> $
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+map <Leader>sr :%s///g<left><left>
+nnoremap <Leader><space> :noh<cr>
+nnoremap <Leader>v V`]
+inoremap jj <ESC>
+nnoremap <C-p> :CtrlP<cr>
+
+
+noremap <Leader>a :Ack <cword> <cr>
+noremap <Leader>as :AckFromSearch -r [app/* config/* lib/* spec/* vendor/*] <cr>
+noremap <Leader>ay "ayiw
+noremap <Leader>by "byiw
+noremap <Leader>cy "cyiw
+noremap <Leader>ap "ap
+noremap <Leader>bp "bp
+noremap <Leader>cp "cp
+
+vmap <Leader>ay "ay
+vmap <Leader>by "by
+vmap <Leader>cy "cy
+vmap <Leader>ax "ax
+vmap <Leader>bx "bx
+vmap <Leader>cx "cx
+
+noremap <Leader>cf :confirm bd<cr>
+noremap <Leader>h :tabprevious<cr>
+noremap <Leader>l :tabnext<cr>
+nmap <Leader>te :Tabularize /=<CR>
+vmap <Leader>te :Tabularize /=<CR>
+nmap <Leader>tc :Tabularize /:<CR>
+vmap <Leader>tc :Tabularize /:<CR>
+nmap <Leader>tq :Tabularize /"<CR>
+vmap <Leader>tq :Tabularize /"<CR>
+nmap <Leader>t :Tabularize /
+vmap <Leader>t :Tabularize /
+"nmap <Leader>nm :%s/<C-V><C-M>//g
+vmap <Leader>ft :s/</\r</g<cr>
+
+"Pane resizing
+nmap <C-Down> <C-w>4+
+nmap <C-Up> <C-w>4-
+nmap <C-Left> <C-w>4>
+nmap <C-Right> <C-w>4<
+
+"semi colon
+vnoremap <Leader>; <ESC>A;<ESC>gv
+nnoremap <Leader>; A;<ESC>
+
+let g:session_autosave = 'no'
+
+nnoremap <Leader>ss :SaveSession  
+nnoremap <Leader>os :OpenSession 
+
+"map <Leader>cc f,a<CR><ESC>
+noremap <Leader>cc :s/, /,\r/g<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Date and Time Stamps
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <F5> "=strftime("%c")<CR>P
+inoremap <F5> <C-R>=strftime("%c")<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Vim-Wiki
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <Leader>we <Plug>VimwikiVSplitLink
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Git mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+noremap <Leader>ga :! git add .<cr>
+noremap <Leader>gad :! git add -A .<cr>
+noremap <Leader>gaf :! git add %<cr>
+noremap <Leader>gcm :! git commit -m "
+noremap <Leader>gb :! git branch<cr>
+noremap <Leader>gcb :! git checkout 
+noremap <Leader>gccb :! git checkout -b
+noremap <Leader>gs :! git status<cr>
+noremap <Leader>grf :! git reset %<cr>
+noremap <Leader>gr :! git reset .<cr>
+noremap <Leader>gln :! git log --oneline -n 2<cr>
+noremap <Leader>gll :! git log --oneline --graph --all --decorate<cr>
+noremap <Leader>gl :! git log<cr>
+noremap <Leader>gm :! git merge 
+noremap <Leader>gmt :! git mergetool --tool=meld<cr>
+noremap <Leader>gcf :! git checkout %<cr>
+noremap <Leader>gd :! git diff %<cr>
+noremap <Leader>gp :! git push<cr>
+noremap <Leader>gls :! git log --stat<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Rails commands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+noremap <F3> :Autoformat<CR>
+nmap <Leader>ric :r! 
+nmap <Leader>rr :r! rake routes<CR>
+nmap <Leader>rv :RVview<CR>
+nmap <Leader>rvc :RVcontroller<CR>
+nmap <Leader>rmi :RVmigration<CR>
+nmap <Leader>rm :RVmodel<CR>
+nmap <Leader>rs :AV<CR>
+nmap <Leader>rb :! sh rebuild.sh<CR>
+nmap <Leader>rft ?it \"<CR>f,vfdhhx
+nmap <Leader>aft ?it \"<CR>/do<CR>hi, focus: true<ESC>
+
+nmap <Leader>fa Hli Fixed --Vx/#<CR>, kpkddo<ESC>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Editor control commands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <Leader>tn :tabnew<CR>
+nnoremap <Leader>r :%s/<C-R>=expand('<cword>')<CR>/
+noremap ' `
+nnoremap vv ^vg_
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"CTags stuff
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"http://vim-taglist.sourceforge.net/manual.html
+nmap <Leader>ct :Rtags<cr>
+"nmap <A-]> :sp <CR>:exec("tag ".expand("<cword>"))<CR>zz
+"nmap <C-]> :vs  <CR>:exec("tag ".expand("<cword>"))<CR>zz 
+"nnoremap <Leader>tag :TlistToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"HTML put tags on new lines
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vmap <Leader>ft :s/</\r</g<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Zencoding plugin settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:user_emmet_expandabbr_key = '<c-e>'
+let g:user_emmet_mode ='a'
+let g:use_emmet_complete_tag    = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Code folding Not working for some reason.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set foldlevelstart=0
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
+
+" "Focus" the current line.  Basically:
+"
+" 1. Close all folds.
+" 2. Open just the folds containing the current line.
+" 3. Move the line to a little bit (15 lines) above the center of the screen.
+" 4. Pulse the cursor line.  My eyes are bad.
+"
+" This mapping wipes out the z mark, which I never use.
+"
+" I use :sus for the rare times I want to actually background Vim.
+nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
+
+"nnoremap <Leader>f0 :set foldlevel=0<CR>
+"nnoremap <Leader>f1 :set foldlevel=1<CR>
+"nnoremap <Leader>f2 :set foldlevel=2<CR>
+"nnoremap <Leader>f3 :set foldlevel=3<CR>
+"nnoremap <Leader>f4 :set foldlevel=4<CR>
+"nnoremap <Leader>f5 :set foldlevel=5<CR>
+"nnoremap <Leader>f6 :set foldlevel=6<CR>
+"nnoremap <Leader>f7 :set foldlevel=7<CR>
+"nnoremap <Leader>f8 :set foldlevel=8<CR>
+"nnoremap <Leader>f9 :set foldlevel=9<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Better code indentation
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vnoremap < <gv
+vnoremap > >gv
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Keep search matches in the middle of the window.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap G Gzz
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" source the vim rc as soon as it's saved
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"au BufWritePost .vimrc so ~/.vimrc
+" Save when losing focus
+"au FocusLost * :silent! wall
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Abbreviations
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+iabbr teh the
+iabbr shoudl should
+iabbr nto not
+iabbr updatign updating
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Airline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set laststatus=2
+let g:airline#extensions#tabline#enabled=1
+let g:airline_theme='bubblegum'
+"let g:airline_powerline_fonts=1
+let g:airline#extensions#branch#enabled=1
+let g:airline_powerline_fonts = 1
+" Syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list=1
+"let g:syntastic_auto_loc_list=1
+"let g:syntastic_check_on_open=1
+"let g:syntastic_check_on_wq=0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Ultisnips
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"rust plugin settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:rust_recommended_style = 0
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"removed the status line so changing the colors to make eyes hurt less
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+hi StatusLine ctermbg=white ctermfg=black
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"vimwiki
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Adding these since they seem to be overwritten or the timeout changes above
+"are making it so you have to do it too fast to be able to use these.
+noremap gl* :VimwikiChangeSymbolTo *<CR>
+noremap gL* :VimwikiChangeSymbolInListTo *<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"NERDTree Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeShowHidden=1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Nim Plugin Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+
+" Jump to tag
+nn <M-g> :call JumpToDef()<cr>
+ino <M-g> <esc>:call JumpToDef()<cr>i
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"this has to be at the bottom.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set iskeyword+=-
+
