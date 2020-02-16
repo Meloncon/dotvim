@@ -1,0 +1,5 @@
+{
+  "suggest.autoTrigger": "trigger",
+  "suggest.triggerAfterInsertEnter": true,
+  "tsserver.npm": "/usr/bin/npm"
+}
