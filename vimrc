@@ -37,6 +37,7 @@ call minpac#add('https://github.com/nvie/vim-flake8.git')
 "call minpac#add('https://github.com/MaxMEllon/vim-jsx-pretty.git')
 "call minpac#add('https://github.com/dense-analysis/ale.git')
 call minpac#add('https://github.com/neoclide/coc.nvim.git')
+call minpac#add('https://github.com/dart-lang/dart-vim-plugin')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
@@ -333,6 +334,7 @@ inoremap <F5> <C-R>=strftime("%c")<CR>
 "Vim-Wiki
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <Leader>we <Plug>VimwikiVSplitLink
+let g:vimwiki_url_maxsave=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Git mappings
