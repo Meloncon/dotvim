@@ -9,6 +9,8 @@
 
 4. git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
 
+5. Open vim, ignore the warnings and then run `:call minpac#update()`.
+
 # Hints and Tips
 
 If using Cygwin as your terminal, you'll need to switch the type of your
