@@ -7,8 +7,7 @@
 3. Run "ln -s ~/.vim/vimrc ~/.vimrc" to link your .vimrc file to the one in
 	 this repo.
 
-4. git clone https://github.com/k-takata/minpac.git \
-    ~/.vim/pack/minpac/opt/minpac
+4. git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
 
 # Hints and Tips
 
