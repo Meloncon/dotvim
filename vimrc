@@ -33,11 +33,14 @@ call minpac#add('https://github.com/tyrannicaltoucan/vim-quantum.git')
 "call minpac#add('https://github.com/cespare/vim-toml.git')
 "call minpac#add('https://github.com/vim-syntastic/syntastic.git')
 call minpac#add('https://github.com/nvie/vim-flake8.git')
+call minpac#add('https://github.com/PieterjanMontens/vim-pipenv')
 "call minpac#add('https://github.com/pangloss/vim-javascript.git')
 "call minpac#add('https://github.com/MaxMEllon/vim-jsx-pretty.git')
 "call minpac#add('https://github.com/dense-analysis/ale.git')
 call minpac#add('https://github.com/neoclide/coc.nvim.git')
 call minpac#add('https://github.com/dart-lang/dart-vim-plugin')
+call minpac#add('https://github.com/posva/vim-vue')
+"call minpac#add('https://github.com/dracula/vim')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
@@ -223,6 +226,7 @@ endif
 
 set termguicolors
 colorscheme quantum
+"colorscheme dracula
 set guifont=Fira\ Mono\ Medium\ 11
 
 "colorscheme railscasts
